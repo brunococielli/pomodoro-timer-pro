@@ -9,7 +9,11 @@ const changeBtn = document.getElementById("change")
 const settingsEl = document.getElementById("settings")
 const workInput = document.getElementById("workInput")
 const breakInput = document.getElementById("breakInput")
+const body = document.querySelector("body")
+const colorBtn = document.getElementById("colorBtn")
 
+colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
+body.style.backgroundColor = localStorage.getItem("color") || "grey"
 clock.innerHTML = `${workMinutes}:00`
 
 function updateClock() {
@@ -79,4 +83,19 @@ function saveSettings() {
   resetTimer()
 
   settingsEl.style.display = "none"
+}
+
+function toggleColor() {
+	const color = body.style.backgroundColor
+
+	if (color === "grey") {
+		body.style.backgroundColor = "white"
+		colorBtn.innerText = "Dark Mode"
+	} else { 
+		body.style.backgroundColor = "grey"
+		colorBtn.innerText = "Light Mode"
+	}	
+
+	localStorage.setItem("color", body.style.backgroundColor)
+	localStorage.setItem("colorBtn", colorBtn.innerText)
 }

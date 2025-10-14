@@ -16,12 +16,13 @@
 	<div>
 		<button onclick="startTimer()">Start</button>
 		<button onclick="pauseTimer()">Pause</button>
-		<button onclick="resetTimer()">Reset</button>
+		<button onclick="resetTimer()">Reset Timer</button>
 	</div>
 
 	<div id="settings" style="display: none; margin-top: 20px;">
 		<label>Work Minutes: <input id="workInput" type="number" min="1" value="25"></label><br>
 		<label>Break Minutes: <input id="breakInput" type="number" min="1" value="5"></label><br>
+		<button id="colorBtn" onclick="toggleColor()"></button>
 		<button onclick="saveSettings()">Save</button>
 	</div>
 	<script src="../js/script.js"></script>
