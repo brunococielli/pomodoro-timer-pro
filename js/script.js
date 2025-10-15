@@ -13,6 +13,7 @@ const body = document.querySelector("body")
 const colorBtn = document.getElementById("colorBtn")
 
 colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
+body.style.color = localStorage.getItem("textColor") || "white"
 body.style.backgroundColor = localStorage.getItem("color") || "grey"
 clock.innerHTML = `${workMinutes}:00`
 
@@ -91,11 +92,14 @@ function toggleColor() {
 	if (color === "grey") {
 		body.style.backgroundColor = "white"
 		colorBtn.innerText = "Dark Mode"
+		body.style.color = "black" 
 	} else { 
 		body.style.backgroundColor = "grey"
+		body.style.color = "white"
 		colorBtn.innerText = "Light Mode"
 	}	
 
 	localStorage.setItem("color", body.style.backgroundColor)
 	localStorage.setItem("colorBtn", colorBtn.innerText)
+	localStorage.setItem("textColor", body.style.color)
 }

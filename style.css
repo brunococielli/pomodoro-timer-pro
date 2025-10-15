@@ -6,51 +6,48 @@ body {
   justify-content: center; /* center vertically */
   align-items: center; /* center horizontally */
   background-color: grey; /* default background */
-  font-family: Arial, sans-serif;
+  font-family: "Press Start 2P", monospace;
   color: white;
   transition: background-color 0.3s ease;
-}
-h1 {
-	text-shadow:
-    -2px -2px 0 black,
-     2px -2px 0 black,
-    -2px  2px 0 black,
-     2px  2px 0 black;
 }
 
 #clock {
 	display: inline;
-	font-size: 4rem;
+	font-size: 6rem;
   font-weight: bold;
   margin-bottom: 20px;
-	text-shadow:
-    -2px -2px 0 black,
-     2px -2px 0 black,
-    -2px  2px 0 black,
-     2px  2px 0 black;
+	padding-top: 50px;
+	padding-bottom: 80px;
 }
 
 button {
   background-color: #333;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px;
   border-radius: 8px;
   margin: 5px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+	font-family: "Press Start 2P", monospace;
 }
 
 button:hover {
   background-color: #555;
 }
 
+button:active {
+  transform: scale(0.95);
+  background-color: #888; /* flash color */
+  transition: background-color 0.1s, transform 0.1s;
+}
+
 #settings {
   display: none; /* hidden by default */
   margin-top: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 25px;
   border-radius: 10px;
   text-align: left;
 }
@@ -61,9 +58,33 @@ label {
 }
 
 input {
-  width: 60px;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
+  width: 70px;
+  padding: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: inherit; /* matches current text color (white or black) */
+  font-size: 1rem;
   text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+	font-family: "Press Start 2P", monospace;
+}
+
+input:focus {
+  border-color: orange;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 6px orange
+}
+
+input:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#change {
+	background-color: orange;
+}
+
+#change:hover {
+	background-color: rgb(204, 135, 6)
 }
