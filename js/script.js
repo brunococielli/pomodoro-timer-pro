@@ -7,10 +7,13 @@ let timer = null
 const clock = document.getElementById("clock")
 const changeBtn = document.getElementById("change")
 const settingsEl = document.getElementById("settings")
+const settingsBtn = document.getElementById("settingsBtn")
 const workInput = document.getElementById("workInput")
 const breakInput = document.getElementById("breakInput")
 const body = document.querySelector("body")
 const colorBtn = document.getElementById("colorBtn")
+const statsEl = document.getElementById("stats")
+const statsBtn = document.getElementById("statsBtn")
 
 colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
 body.style.color = localStorage.getItem("textColor") || "white"
@@ -67,8 +70,13 @@ function toggleMode() {
 }
 
 function toggleSettings() {
-  settingsEl.style.display =
-    settingsEl.style.display === "none" ? "block" : "none"
+  if (settingsEl.style.display === "none") {
+		settingsEl.style.display = "block"
+		settingsBtn.innerText = "Close"
+	} else {
+		settingsEl.style.display = "none"
+		settingsBtn.innerText = "Settings"
+	}
 
   workInput.value = workMinutes
   breakInput.value = breakMinutes
@@ -84,6 +92,7 @@ function saveSettings() {
   resetTimer()
 
   settingsEl.style.display = "none"
+	settingsBtn.innerText = "Settings"
 }
 
 function toggleColor() {
@@ -102,4 +111,14 @@ function toggleColor() {
 	localStorage.setItem("color", body.style.backgroundColor)
 	localStorage.setItem("colorBtn", colorBtn.innerText)
 	localStorage.setItem("textColor", body.style.color)
+}
+
+function toggleStats() {
+	if (statsEl.style.display === "none") {
+		statsEl.style.display = "block"
+		statsBtn.innerText = "Close"
+	} else {
+		statsEl.style.display = "none"
+		statsBtn.innerText = "Stats"
+	}
 }
