@@ -88,3 +88,7 @@ input:hover {
 #change:hover {
 	background-color: rgb(204, 135, 6)
 }
+
+.statsLabel {
+	color: rgb(245, 152, 152);
+}

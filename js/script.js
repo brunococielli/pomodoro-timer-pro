@@ -3,6 +3,9 @@ let breakMinutes = Number(localStorage.getItem("breakMinutes")) || 5
 let time = workMinutes * 60
 let isBreak = false
 let timer = null
+let total = Number(localStorage.getItem("total")) || 0
+let week = Number(getItemWithExpiry("week")) || 0
+let day = Number(getItemWithExpiry("day")) || 0
 
 const clock = document.getElementById("clock")
 const changeBtn = document.getElementById("change")
@@ -14,11 +17,15 @@ const body = document.querySelector("body")
 const colorBtn = document.getElementById("colorBtn")
 const statsEl = document.getElementById("stats")
 const statsBtn = document.getElementById("statsBtn")
+const totalLabel = document.getElementById("total")
+const weekLabel = document.getElementById("week")
+const dayLabel = document.getElementById("day")
 
 colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
 body.style.color = localStorage.getItem("textColor") || "white"
 body.style.backgroundColor = localStorage.getItem("color") || "grey"
 clock.innerHTML = `${workMinutes}:00`
+updateStatsLabels()
 
 function updateClock() {
   const minutes = Math.floor(time / 60)
@@ -34,6 +41,17 @@ function start() {
   } else {
     clearInterval(timer)
     timer = null
+
+		if (!isBreak) {
+			total++
+			week++
+			day++
+
+			localStorage.setItem("total", total)
+			setItemWithExpiry("week", week, 604800000)
+			setItemWithExpiry("day", day, 86400000)
+			updateStatsLabels()
+		}
   }
 }
 
@@ -113,6 +131,12 @@ function toggleColor() {
 	localStorage.setItem("textColor", body.style.color)
 }
 
+function updateStatsLabels() {
+  totalLabel.innerHTML = `Total Study Sessions: ${total}`;
+  weekLabel.innerHTML = `Week Study Sessions: ${week}`;
+  dayLabel.innerHTML = `Day Study Sessions: ${day}`;
+}
+
 function toggleStats() {
 	if (statsEl.style.display === "none") {
 		statsEl.style.display = "block"
@@ -121,4 +145,31 @@ function toggleStats() {
 		statsEl.style.display = "none"
 		statsBtn.innerText = "Stats"
 	}
+
+	updateStatsLabels()
+}
+
+function setItemWithExpiry(key, value, ttl) {
+  const now = new Date()
+  const item = {
+    value: value,
+    expiry: now.getTime() + ttl,
+  }
+
+  localStorage.setItem(key, JSON.stringify(item))
+}
+
+function getItemWithExpiry(key) {
+  const itemStr = localStorage.getItem(key)
+  if (!itemStr) return null
+
+  const item = JSON.parse(itemStr)
+  const now = new Date()
+	
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem(key)
+    return null
+  }
+
+  return item.value
 }
