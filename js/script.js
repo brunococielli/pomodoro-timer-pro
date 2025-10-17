@@ -20,6 +20,9 @@ const statsBtn = document.getElementById("statsBtn")
 const totalLabel = document.getElementById("total")
 const weekLabel = document.getElementById("week")
 const dayLabel = document.getElementById("day")
+const startBtn = document.getElementById("startBtn")
+const pauseBtn = document.getElementById("pauseBtn")
+const resetBtn = document.getElementById("resetBtn")
 
 colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
 body.style.color = localStorage.getItem("textColor") || "white"
@@ -172,4 +175,37 @@ function getItemWithExpiry(key) {
   }
 
   return item.value
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.code === "Space") {
+    event.preventDefault()
+
+    if (!timer)  {
+			startTimer()
+			flashButton(startBtn)
+		}
+    else {
+			pauseTimer()
+			flashButton(pauseBtn)
+		}
+  }
+
+	if (event.code === "KeyR") {
+		resetTimer()
+		flashButton(resetBtn)
+	}
+
+	if (event.code === "KeyC") {
+		event.preventDefault()
+		toggleMode()
+		flashButton(changeBtn)
+	}
+})
+
+function flashButton(button) {
+	button.classList.add("flash")
+	setTimeout(() => {
+		button.classList.remove("flash");
+	}, 100)
 }
