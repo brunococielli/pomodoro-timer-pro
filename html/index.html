@@ -9,7 +9,11 @@
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-	<h1>Pomodoro Timer</h1>
+	<div class="title-container">
+		<h1>Pomodoro Timer</h1>
+		<button id="muteBtn" style="display: none;" onclick="toggleMute()">Mute</button>
+	</div>
+	
 	<div id="clock"></div>
 
 	<button id="change" onclick="toggleMode()">Break</button>

@@ -25,6 +25,8 @@ const dayLabel = document.getElementById("day")
 const startBtn = document.getElementById("startBtn")
 const pauseBtn = document.getElementById("pauseBtn")
 const resetBtn = document.getElementById("resetBtn")
+const muteBtn = document.getElementById("muteBtn")
+const alarmSound = document.getElementById("alarmSound")
 
 colorBtn.innerText = localStorage.getItem("colorBtn") || "Light Mode"
 body.style.color = localStorage.getItem("textColor") || "white"
@@ -48,10 +50,14 @@ function start() {
     clearInterval(timer)
     timer = null
 
-		const alarmSound = document.getElementById("alarmSound")
+		muteBtn.style.display = "block"
     alarmSound.currentTime = 0
     alarmSound.play()
 		showNotification("Pomodoro Complete!", "Time for a break ☕")
+
+		alarmSound.onended = () => {
+    	muteBtn.style.display = "none";
+  	}
 
 		if (!isBreak) {
 			total++
@@ -67,7 +73,7 @@ function start() {
 }
 
 function startTimer() {
-  if (!timer) timer = setInterval(start, 1000)
+  if (!timer && time) timer = setInterval(start, 1000)
 }
 
 function pauseTimer() {
@@ -220,7 +226,12 @@ function flashButton(button) {
 
 function showNotification(title, body) {
   new Notification(title, {
-    body: body,
-    icon: "../assets/icon" // relative path to your icon file
-  });
+    body: body
+  })
+}
+
+function toggleMute() {
+	alarmSound.pause()
+	alarmSound.currentTime = 0
+	muteBtn.style.display = "none"
 }

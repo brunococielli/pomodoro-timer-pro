@@ -2,10 +2,10 @@ body {
   margin: 0;
   height: 100vh;
   display: flex;
-  flex-direction: column; /* stack elements vertically */
-  justify-content: center; /* center vertically */
-  align-items: center; /* center horizontally */
-  background-color: grey; /* default background */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  background-color: grey; 
   font-family: "Press Start 2P", monospace;
   color: white;
   transition: background-color 0.3s ease;
@@ -39,12 +39,12 @@ button:hover {
 
 button:active {
   transform: scale(0.95);
-  background-color: #888; /* flash color */
+  background-color: #888; 
   transition: background-color 0.1s, transform 0.1s;
 }
 
 #settings {
-  display: none; /* hidden by default */
+  display: none; 
   margin-top: 20px;
   background: rgba(0, 0, 0, 0.15);
   padding: 25px;
@@ -58,12 +58,12 @@ label {
 }
 
 input {
-  width: 70px;
+  width: 85px;
   padding: 8px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.1);
-  color: inherit; /* matches current text color (white or black) */
+  color: inherit; 
   font-size: 1rem;
   text-align: center;
   outline: none;
@@ -97,4 +97,23 @@ input:hover {
   transform: scale(0.95);
   background-color: #888;
   transition: background-color 0.1s, transform 0.1s;
+}
+
+.title-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.title-container h1 {
+  margin: 0;
+  display: inline-block;
+}
+
+#muteBtn {
+  position: absolute;
+  right: -115px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
 }
