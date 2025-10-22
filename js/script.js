@@ -6,6 +6,8 @@ let timer = null
 let total = Number(localStorage.getItem("total")) || 0
 let week = Number(getItemWithExpiry("week")) || 0
 let day = Number(getItemWithExpiry("day")) || 0
+let notifInterval = null
+let alarmInterval = null
 
 const clock = document.getElementById("clock")
 const changeBtn = document.getElementById("change")
@@ -29,6 +31,7 @@ body.style.color = localStorage.getItem("textColor") || "white"
 body.style.backgroundColor = localStorage.getItem("color") || "grey"
 clock.innerHTML = `${workMinutes}:00`
 updateStatsLabels()
+updateClock()
 
 function updateClock() {
   const minutes = Math.floor(time / 60)
@@ -44,6 +47,11 @@ function start() {
   } else {
     clearInterval(timer)
     timer = null
+
+		const alarmSound = document.getElementById("alarmSound")
+    alarmSound.currentTime = 0
+    alarmSound.play()
+		showNotification("Pomodoro Complete!", "Time for a break ☕")
 
 		if (!isBreak) {
 			total++
@@ -208,4 +216,11 @@ function flashButton(button) {
 	setTimeout(() => {
 		button.classList.remove("flash");
 	}, 100)
+}
+
+function showNotification(title, body) {
+  new Notification(title, {
+    body: body,
+    icon: "../assets/icon" // relative path to your icon file
+  });
 }
